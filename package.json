@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/c0deritter/remote-method-call"
+    "url": "git+https://github.com/c0deritter/remote-method-call/tree/coderitter-api"
   },
   "keywords": [
     ""
@@ -28,5 +28,5 @@
   "bugs": {
     "url": "https://github.com/c0deritter/remote-method-call/issues"
   },
-  "homepage": "https://github.com/c0deritter/remote-method-call#readme"
+  "homepage": "https://github.com/c0deritter/remote-method-call/tree/coderitter-api#readme"
 }
