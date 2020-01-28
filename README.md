@@ -64,7 +64,7 @@ let receivedResult = new Result('remoteError', 'Error message')
 return Result.fromRemote(receivedResult)
 ```
 
-This method returns the result if it is of type `value` or `misfits` and throws an error if it is of type `remoteError`. That way the exact behaviour found on the remote side is emulated. It will feel like you just did a local method call instead of a remote method call. When using `Result.fromRemote` there will be no difference. It is even more convenient because you can ask the developers of the remote side to fix the bugs for you.
+This method returns the result if it is of type `value` or `misfits` and throws an error if it is of type `remoteError`. That way the exact behaviour found on the remote side is simulated. It will feel like you just did a local method call instead of a remote method call. It is even more convenient because you can ask the developers of the remote side to fix the bugs for you.
 
 When working with the result which was returned by `Result.fromRemote` you can ask it if it is if type `value` or `misfits` and react accordingly.
 
