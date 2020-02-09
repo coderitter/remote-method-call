@@ -1,6 +1,6 @@
 {
   "name": "coderitter-api-remote-method-call",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A remote method call interface",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -8,7 +8,7 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "mega-nice-validation": "^3.1.1"
+    "mega-nice-validation": "^3.1.2"
   },
   "devDependencies": {
     "typescript": "^3.7.4"
