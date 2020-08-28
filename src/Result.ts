@@ -1,33 +1,10 @@
 import { Misfit } from 'mega-nice-validation'
 
-export default class Result<T> {
+export default class Result {
 
-  type: string
-  value!: T
-  misfits: Misfit[] = []
+  type: string = 'value'
+  misfits!: Misfit[]
   remoteError!: string
-
-  constructor(type?: string, result?: T|Misfit|Misfit[]|string) {
-    // conversion to any type to prevent the TypeScript compiler from complaining
-    this.type = <any> type
-
-    if (type == 'value') {
-      this.value = <T> result
-    }
-
-    if (type == 'misfits') {
-      if (! (result instanceof Array)) {
-        this.misfits = [ <Misfit> result ]
-      }
-      else {
-        this.misfits = result
-      }
-    }
-
-    if (type == 'remoteError') {
-      this.remoteError = <string> result
-    }
-  }
 
   isValue(): boolean {
     return this.type == 'value'
@@ -41,45 +18,53 @@ export default class Result<T> {
     return this.type == 'remoteError'
   }
 
-  static value<T>(value?: T): Result<T> {
-    return new Result('value', value)
+  static misfits(misfit: Misfit): Result
+  static misfits(misfit: Misfit[]): Result
+
+  static misfits(misfits: Misfit|Misfit[]): Result {
+    let result = new Result
+    result.type = 'misfits'
+
+    if (misfits instanceof Array) {
+      result.misfits = misfits
+    }
+    else if (misfits != undefined) {
+      result.misfits = [ misfits ]
+    }
+
+    return result
   }
 
-  static misfits<T>(misfits: Misfit|Misfit[]): Result<T> {
-    return new Result<T>('misfits', misfits)
-  }
-
-  static remoteError<T>(error: string): Result<T> {
-    return new Result<T>('remoteError', error)
+  static remoteError(error: string): Result {
+    let result = new Result
+    result.type = 'remoteError'
+    result.remoteError = error
+    return result
   }
 
   static checkIfRawResultObjIsValid(resultObj: any) {
     if (typeof resultObj !== 'object') {
-      return new Misfit('NotAnObject')
+      throw new Error('Result is not an object')
+    }
+
+    if (resultObj === null) {
+      throw new Error('Result is null')
     }
 
     if (resultObj.type == undefined) {
-      throw new Error('Given raw result object does not have a \`type\`property')
+      throw new Error('Result does not have a \'type\' property')
     }
   }
 
-  static fromRemote<T>(result: Result<T>, convertValue?: (value: any) => T): Result<T> {
+  static fromRemote<T>(result: Result): Result {
     if (result.isRemoteError()) {
       throw new Error(result.remoteError)
     }
-  
-    if (result.isMisfits()) {
-      return result
+
+    if (! result.isMisfits() && ! result.isValue()) {
+      throw new Error('Unknown result type')
     }
   
-    if (result.isValue()) {
-      if (convertValue != undefined) {
-        return Result.value(convertValue(result.value))
-      }
-      
-      return result
-    }
-  
-    throw new Error('Unknown result type')
-    }
+    return result
+  }
 }
