@@ -32,7 +32,7 @@ export default class Result {
       result.misfits = [ misfits ]
     }
 
-    return result as any
+    return <T> result
   }
 
   static remoteError(error: string): Result {
