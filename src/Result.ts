@@ -18,11 +18,11 @@ export default class Result {
     return this.type == 'remoteError'
   }
 
-  static misfits(misfit: Misfit): Result
-  static misfits(misfit: Misfit[]): Result
+  static misfits<T extends Result>(misfit: Misfit): T
+  static misfits<T extends Result>(misfit: Misfit[]): T
 
-  static misfits(misfits: Misfit|Misfit[]): Result {
-    let result = new Result
+  static misfits<T extends Result>(misfits: Misfit|Misfit[]): T {
+    let result = new this()
     result.type = 'misfits'
 
     if (misfits instanceof Array) {
@@ -32,11 +32,11 @@ export default class Result {
       result.misfits = [ misfits ]
     }
 
-    return result
+    return result as any
   }
 
   static remoteError(error: string): Result {
-    let result = new Result
+    let result = new this()
     result.type = 'remoteError'
     result.remoteError = error
     return result
