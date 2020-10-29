@@ -56,7 +56,7 @@ export default class Result {
     }
   }
 
-  static fromRemote<T>(result: Result): Result {
+  static fromRemote<T extends Result>(result: T): T {
     if (result.isRemoteError()) {
       throw new Error(result.remoteError)
     }
