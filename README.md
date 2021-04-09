@@ -12,7 +12,7 @@ Furthermore is the data format compatible to any other protocol like pure TCP, W
 
 ## Related packages
 
-To send POSTonly styled remote method call HTTP messages from a browser you can use the package [postonly-browser-client](https://github.com/c0deritter/postonly-browser-client).
+To send POSTonly styled remote method call HTTP messages from a browser you can use the package [postonly-request](https://github.com/c0deritter/postonly-request).
 
 On the server side you can use [remote-method-call](https://github.com/c0deritter/remote-method-api) which offers a simple mapping from a received remote method call to a function which receives the parameters of that remote method call for further processing.
 
