@@ -1,14 +1,16 @@
 # Remote Method Call
 
+An adoption of the [remote-method-call](https://github.com/c0deritter/remote-method-call) package for the Coderitter API architecture. It also containsAlso refer to the original [documentation](https://github.com/c0deritter/remote-method-call#readme).
+
 ## Install
 
-`npm install remote-method-call`
+`npm install coderitter-api-remote-method-call`
 
 ## Overview
 
 ### RemoteMethodCall
 
-There is the interface `RemoteMethodCall` for making remote method calls.
+There is an interface `RemoteMethodCall` for sending a remote method calls to a server.
 
 ```typescript
 interface RemoteMethodCall {
@@ -19,56 +21,42 @@ interface RemoteMethodCall {
 
 ### Result
 
-And there is a standardized result result class `Result`.
+There is a class `Result` for sending a result to a client. A result can either be of type `value`, in which case everything went as expected, it can be of type `misfits`, in which case there were misfits in the parameter of the remote method call, or it can be of type `remoteError` in which case there was an error on the remote side.
 
 ```typescript
 class Result<T> {
 
-  type: string
-  value!: T
-  misfits: Misfit[] = []
-  remoteError!: string
+  type: string // value, misfits, remoteError
+  value!: T // the value
+  misfits: Misfit[] = [] // the misfits
+  remoteError!: string // the remoteError
 
-  constructor(type?: string, result?: T|Misfit|Misfit[]|string) {
-...
+  // 'value' and 'remoteError' are asserted as non null by the exclamation mark '!'
+  // because otherwise TypeScript would want you to check for it which can be annoying
+
+  constructor(type?: string, result?: T|Misfit|Misfit[]|string) { ...
 ```
 
-The result has one of the three types.
-
-- `value`: The expected value the method should have returned.
-- `misfits`: An array of misfits from package [`mega-nice-validation`](https://github.com/c0deritter/mega-nice-validation) which signal misfitting parameters and can be displayed as errors in a form for example.
-- `remoteError`: If the method threw an error this property contains a message for the client.
+The class `Misfit` describes misfits that occured while validating the parameter. It is part of the package [knight-validation](https://github.com/c0deritter/knight-validation).
 
 There are three static methods for constructing the different result types.
 
 ```typescript
 Result.value(42)
-
-import { Misfit } from 'mega-nice-validation'
-let misfits: Misfit[] = [ new Misfit('name', 'Required') ]
 Result.misfits(misfits)
-
-try {
-  remoteMethodCall(parameter)
-}
-catch (e) {
-  Result.remoteError('Oops there was an error in our application. This should not happen. ' + e.message)
-}
+Result.remoteError('There was an error in our application. We will fix this soon.')
 ```
 
-When receiving the result in the client you should use the static method `fromRemote`.
+When receiving the result in the client you can use the static method `fromRemote()` to throw an exception if there was a remote error.
 
 ```typescript
-// Somehow you need to receive the result and convert it with the help of mega-nice-json to the actual instance of its class. Here we just instantiate the result for demonstration reasons.
 let receivedResult = new Result('remoteError', 'Error message')
-return Result.fromRemote(receivedResult)
+return Result.fromRemote(receivedResult) // throws an exception in case of a remote error
 ```
 
-This method returns the result if it is of type `value` or `misfits` and throws an error if it is of type `remoteError`. That way the exact behaviour found on the remote side is simulated. It will feel like you just did a local method call instead of a remote method call. It is even more convenient because you can ask the developers of the remote side to fix the bugs for you.
-
-When working with the result which was returned by `Result.fromRemote` you can ask it if it is if type `value` or `misfits` and react accordingly.
+If there was no remote error you can continue the work with the result object. Check if there were misfits in the parameters of the remote method call by using `isMisfits()` or if you received the actual value by using `isValue()`.
 
 ```typescript
-result.isValue()
 result.isMisfits()
+result.isValue()
 ```

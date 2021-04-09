@@ -1,15 +1,12 @@
 {
   "name": "coderitter-api-remote-method-call",
   "version": "3.0.3",
-  "description": "A remote method call interface",
+  "description": "An adoption of the remote method call for the Coderitter API architecture",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
-  "dependencies": {
-    "mega-nice-validation": "^4.2.2"
-  },
   "devDependencies": {
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.0.3",
@@ -33,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/c0deritter/remote-method-call/issues"
   },
-  "homepage": "https://github.com/c0deritter/remote-method-call/tree/coderitter-api#readme"
+  "homepage": "https://github.com/c0deritter/remote-method-call/tree/coderitter-api#readme",
+  "dependencies": {
+    "knight-validation": "^1.0.0"
+  }
 }

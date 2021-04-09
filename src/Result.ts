@@ -1,4 +1,4 @@
-import { Misfit } from 'mega-nice-validation'
+import { Misfit } from 'knight-validation'
 
 export default class Result {
 
