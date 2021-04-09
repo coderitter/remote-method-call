@@ -1,7 +1,7 @@
 {
   "name": "remote-method-call",
   "version": "1.0.0",
-  "description": "An interface for remote method calls",
+  "description": "A simpler alternative to REST styled HTTP APIs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
