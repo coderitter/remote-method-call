@@ -1,4 +1,4 @@
-# Remote Method Call
+# Coderitter API adopted Remote Method Call
 
 An adoption of the [remote-method-call](https://github.com/c0deritter/remote-method-call) package for the Coderitter API architecture. Also refer to the original [documentation](https://github.com/c0deritter/remote-method-call#readme).
 
