@@ -1,13 +1,12 @@
 {
   "name": "remote-method-call",
   "version": "1.0.0",
-  "description": "A remote method call interface",
+  "description": "An interface for remote method calls",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
-  "dependencies": {},
   "devDependencies": {
     "typescript": "^3.9.7"
   },
