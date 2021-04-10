@@ -35,25 +35,11 @@ export default class Result {
     return <T> result
   }
 
-  static remoteError(error: string): Result {
+  static remoteError<T extends Result>(error: string): T {
     let result = new this()
     result.type = 'remoteError'
     result.remoteError = error
-    return result
-  }
-
-  static checkIfRawResultObjIsValid(resultObj: any) {
-    if (typeof resultObj !== 'object') {
-      throw new Error('Result is not an object')
-    }
-
-    if (resultObj === null) {
-      throw new Error('Result is null')
-    }
-
-    if (resultObj.type == undefined) {
-      throw new Error('Result does not have a \'type\' property')
-    }
+    return <T> result
   }
 
   static fromRemote<T extends Result>(result: T): T {

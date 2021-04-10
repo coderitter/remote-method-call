@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { Misfit } from 'mega-nice-validation'
+import { Misfit } from 'knight-validation'
 import 'mocha'
 import Result from '../src/Result'
 

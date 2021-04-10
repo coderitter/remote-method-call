@@ -27,11 +27,10 @@ There is a class `Result` for sending a result to a client. A result can either 
 class Result<T> {
 
   type: string // value, misfits, remoteError
-  value!: T // the value
-  misfits: Misfit[] = [] // the misfits
+  misfits!: Misfit[] // the misfits
   remoteError!: string // the remoteError
 
-  // 'value' and 'remoteError' are asserted as non null by the exclamation mark '!'
+  // 'misfits' and 'remoteError' are asserted as non null by the exclamation mark '!'
   // because otherwise TypeScript would want you to check for it which can be annoying
 
   constructor(type?: string, result?: T|Misfit|Misfit[]|string) { ...
@@ -39,10 +38,9 @@ class Result<T> {
 
 The class `Misfit` describes misfits that occured while validating the parameter. It is part of the package [knight-validation](https://github.com/c0deritter/knight-validation).
 
-There are three static methods for constructing the different result types.
+The following static methods can be used to constructing misfit and remote error results.
 
 ```typescript
-Result.value(42)
 Result.misfits(misfits)
 Result.remoteError('There was an error in our application. We will fix this soon.')
 ```
@@ -59,4 +57,19 @@ If there was no remote error you can continue the work with the result object. C
 ```typescript
 result.isMisfits()
 result.isValue()
+```
+
+#### Creating your own result class
+
+To use the result in your application you need to derive a new one for every use case. This is good for the documentation.
+
+```typescript
+class UserCreateResult extends Result {
+  createdUser: User
+
+  constructor(createdUser: User) {
+    super()
+    this.createdUser = createdUser
+  }
+}
 ```

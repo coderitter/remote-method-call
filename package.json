@@ -1,6 +1,6 @@
 {
   "name": "coderitter-api-remote-method-call",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "An adoption of the remote method call for the Coderitter API architecture",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
