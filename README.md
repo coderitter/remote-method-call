@@ -32,7 +32,7 @@ There is an interface `RemoteMethodCall` for sending a remote method calls to a 
 
 ```typescript
 interface RemoteMethodCall {
-  methodName: string
+  method: string
   parameter?: any
 }
 ```
