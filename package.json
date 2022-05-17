@@ -1,15 +1,12 @@
 {
   "name": "remote-method-call",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A simpler alternative to REST styled HTTP APIs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
-  "devDependencies": {
-    "typescript": "^3.9.7"
-  },
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "build": "rm -rf lib && tsc"
@@ -25,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/c0deritter/remote-method-call/issues"
   },
-  "homepage": "https://github.com/c0deritter/remote-method-call#readme"
+  "homepage": "https://github.com/c0deritter/remote-method-call#readme",
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
 }

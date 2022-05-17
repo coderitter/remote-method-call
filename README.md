@@ -28,7 +28,7 @@ The only thing in this package is the interface `RemoteMethodCall`.
 
 ```typescript
 interface RemoteMethodCall {
-  methodName: string
+  method: string
   parameter?: any
 }
 ```

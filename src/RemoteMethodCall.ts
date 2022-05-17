@@ -1,4 +1,4 @@
 export default interface RemoteMethodCall {
-  methodName: string
+  method: string
   parameter?: any
 }
