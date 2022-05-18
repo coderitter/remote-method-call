@@ -32,12 +32,15 @@ There is an interface `RemoteMethodCall` for sending a remote method calls to a 
 
 ```typescript
 interface RemoteMethodCall {
+  apiVersion: number
   apiKey?: string
   token?: string
   method: string
   parameter?: any
 }
 ```
+
+The property `apiVersion` is a number starting from 1 and with every new version is incremented by 1. Every increase indicates incompatibilities to the version before. In contrast, adding new features to an API does not increase its version number.
 
 The properties `apiKey` and `token` are for authentication/authorization purposes. An API key is used for autenthicating other computer programs and a token to authenticate human users.
 
