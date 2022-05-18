@@ -32,10 +32,16 @@ There is an interface `RemoteMethodCall` for sending a remote method calls to a 
 
 ```typescript
 interface RemoteMethodCall {
+  apiKey?: string
+  token?: string
   method: string
   parameter?: any
 }
 ```
+
+The properties `apiKey` and `token` are for authentication/authorization purposes. An API key is used for autenthicating other computer programs and a token to authenticate human users.
+
+The properties `method` and `parameter` represent the name of the remote method and the parameters one likes to pass to it. A parameter can really be anything from simple values to objects. The latter are more common and the recommended style.
 
 ### Result
 
