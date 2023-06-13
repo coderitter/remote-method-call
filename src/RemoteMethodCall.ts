@@ -1,4 +1,4 @@
-export default interface RemoteMethodCall {
+export interface RemoteMethodCall {
   method: string
-  parameter?: any
+  parameters?: any
 }

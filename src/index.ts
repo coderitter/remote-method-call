@@ -1,1 +1,1 @@
-export { default as RemoteMethodCall } from './RemoteMethodCall'
+export * from './RemoteMethodCall'
