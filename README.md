@@ -29,6 +29,10 @@ interface RemoteMethodCall {
 
 This package is meant to provide the least common denominator for specific remote method call implementations. A specific application will define additional properties like for authentication or API versioning.
 
+## Creating a custom RMC definition
+
+To create your own remote method call implementation, you do not need to install this package as a dependency. Just copy the two properties into your own interface definition.
+
 ## Using Remote Method Calls with the HTTP protocol
 
 For sending a remote method call via HTTP, you need to use the HTTP usage style [POSTonly](#postonly) to take full advantage of the protocol interoperability. It uses the HTTP method `POST` only, the URL path is static like `api` and does not include any parameters. The remote method call JSON is put into HTTP message body.
