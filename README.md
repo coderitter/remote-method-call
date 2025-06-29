@@ -6,8 +6,6 @@ How is it different from the known *remote procedure call* or *RPC*? The word pr
 
 The RMC implementation of this package can be used with any protocol like HTTP, WebSockets, Kafka, MQTT and so on, without the need to adjust the data format. Or the processing of the remote method call in the application. The kind of transport does not matter. Thus it yields a higher compatibility like for example a REST implementations which cannot be easily adopted to other protocols.
 
-This package does not define any result data formats since they can be very different and need to be adjusted to the application at hand.
-
 ## Related packages
 
 On the server side you can use [remote-method-api](https://github.com/c0deritter/remote-method-api) which offers a simple mapping from a received remote method call to a function which receives the parameters of that remote method call for further processing. You can use the package [postonly-request](https://github.com/c0deritter/postonly-request) to send POSTonly styled remote method call API requests from a browser application to a server.
@@ -29,6 +27,8 @@ interface RemoteMethodCall {
 
 This package is meant to provide the least common denominator for specific remote method call implementations. A specific application will define additional properties like for authentication or API versioning.
 
+This package does not define any result data formats, since they can be very different from application to application. Just create your own one.
+
 ## Creating a custom RMC definition
 
 To create your own remote method call implementation, you do not need to install this package as a dependency. Just copy the two properties into your own interface definition.
@@ -39,7 +39,19 @@ For sending a remote method call via HTTP, you need to use the HTTP usage style 
 
 ## POSTonly
 
-POSTonly is an HTTP usage style in which the only HTTP method being used is `POST`. On top of that, the location for every needed parameter is the HTTP message body. This results in the URL path to be one static string which does not change between different API request types.
+POSTonly is an HTTP usage style in which the only HTTP method being used is `POST`. On top of that, the location for every needed parameter is the HTTP message body. This results in the URL path to be one static string which does not change between different API endpoints.
+
+```
+POST /api HTTP/1.1
+Host: example.com
+Content-Type: application/json
+Content-Length: 60
+
+{
+  "method": "User.get",
+  "parameters": { "id": 1 }
+}
+```
 
 ### Problems with HTTP REST
 
